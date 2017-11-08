@@ -8,9 +8,10 @@ use App\User;
 
 class RegisterController extends Controller
 {
-    public function register(Register $request){
+    public function register(Request $request){
         $user = User::create([
-        	'name' => $request->name,
+        	'first_name' => $request->firstName,
+        	'last_name' => $request->lastName,
         	'email' => $request->email,
         	'password' => bcrypt($request->password)
     	]);
