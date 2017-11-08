@@ -8,9 +8,7 @@ class LoginController extends Controller
 {
     public function authenticate(Request $request)
     {
-				// $a = '{"aaa": "bbbb"}';
-    // 		return $a;
-
+        
         $credentials = $request->only([ 'email', 'password' ]);
 
         try {
