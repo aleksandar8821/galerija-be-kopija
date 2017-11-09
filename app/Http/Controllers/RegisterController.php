@@ -15,7 +15,8 @@ class RegisterController extends Controller
         	'email' => $request->email,
         	'password' => bcrypt($request->password)
     	]);
-    	return $user;
+      $token = \JWTAuth::fromUser($user);  
+    	return response()->json(compact('token'));
     }
 
 }
