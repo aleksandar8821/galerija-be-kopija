@@ -36,7 +36,12 @@ class GalleryController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $gallery = Gallery::with('images')->create([
+            'name' => $request->input('name'),
+            'description' => $request->input('description'),
+            // 'user_id' => \Auth::user()->id
+            'user_id' => $request->input('user_id')
+        ]);
     }
 
     /**
