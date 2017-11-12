@@ -36,12 +36,31 @@ class GalleryController extends Controller
      */
     public function store(Request $request)
     {
-        $gallery = Gallery::with('images')->create([
+        // $gallery = Gallery::with('images')->create([
+        //     'name' => $request->input('name'),
+        //     'description' => $request->input('description'),
+        //     // 'user_id' => \Auth::user()->id
+        //     'user_id' => $request->input('user_id')
+        // ]);
+
+        $gallery = Gallery::create([
             'name' => $request->input('name'),
             'description' => $request->input('description'),
-            // 'user_id' => \Auth::user()->id
-            'user_id' => $request->input('user_id')
+            'user_id' => \Auth::user()->id
+            // 'user_id' => $request->input('user_id')
         ]);
+
+        // $gallery->images()->createMany($request->input('images'));
+
+        foreach ($request->input('images') as $key => $value) {
+            $gallery->images()->create([
+                'url' => $value,
+                ]);
+        }
+
+        return $request;
+        // $pera = 'djoka';
+        // return json_encode(compact('pera'));
     }
 
     /**
