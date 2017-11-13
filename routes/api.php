@@ -23,4 +23,4 @@ Route::get('galleries', 'GalleryController@index');
 Route::get('galleries/{id}', 'GalleryController@show');
 Route::middleware('jwt')->post('galleries', 'GalleryController@store');
 Route::middleware('jwt')->get('my-galleries', 'GalleryController@getMyGalleries');
-Route::middleware('jwt')->get('authors-galleries', 'GalleryController@getAuthorsGalleries');
+Route::middleware('jwt')->get('authors/{id}', 'GalleryController@getAuthorsGalleries');

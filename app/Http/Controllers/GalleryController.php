@@ -113,7 +113,7 @@ class GalleryController extends Controller
 
     public function getMyGalleries()
     {
-        $galleries = Gallery::where('user_id', \Auth::user()->id)->get();
+        $galleries = Gallery::where('user_id', \Auth::user()->id)->latest()->get();
         return $galleries;
     }
 
