@@ -20,4 +20,7 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 Route::post('/login', 'LoginController@authenticate');
 Route::post('/register', 'RegisterController@register');
 Route::get('galleries', 'GalleryController@index');
+Route::get('galleries/{id}', 'GalleryController@show');
 Route::middleware('jwt')->post('galleries', 'GalleryController@store');
+Route::middleware('jwt')->get('my-galleries', 'GalleryController@getMyGalleries');
+Route::middleware('jwt')->get('authors-galleries', 'GalleryController@getAuthorsGalleries');

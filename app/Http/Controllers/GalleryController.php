@@ -14,7 +14,9 @@ class GalleryController extends Controller
      */
     public function index()
     {
-        $galleries = Gallery::with('user')->get();
+        $galleries = Gallery::with(['user', 'images'/* => function ($query) {
+            $query->first();
+        }*/])->latest()->get();
         return $galleries;
     }
 
@@ -71,7 +73,8 @@ class GalleryController extends Controller
      */
     public function show($id)
     {
-        //
+        $gallery = Gallery::with(['user', 'images'])->find($id);
+        return $gallery;
     }
 
     /**
@@ -106,5 +109,17 @@ class GalleryController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    public function getMyGalleries()
+    {
+        $galleries = Gallery::where('user_id', \Auth::user()->id)->get();
+        return $galleries;
+    }
+
+    public function getAuthorsGalleries($id)
+    {
+        $galleries = Gallery::where('user_id', $id)->get();
+        return $galleries;
     }
 }
