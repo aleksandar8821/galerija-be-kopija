@@ -10,7 +10,9 @@ class RegisterController extends Controller
 {
     public function register(Request $request){
 
-        $isValidated = $request->validate([
+        // Laravel prilikom ajax zahteva automatski vraca greske u json formatu, a prilikom regularnog http zahteva pravi redirekciju msm na home stranicu i tamo bi trebalo da su ti dostupni errori u json formatu!
+
+        $request->validate([
             'first_name' => 'required',
             'last_name' => 'required',
             'email' => 'required|email|unique:users',
