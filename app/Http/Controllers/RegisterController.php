@@ -10,14 +10,16 @@ class RegisterController extends Controller
 {
     public function register(Request $request){
 
-        $request->validate([
+        $isValidated = $request->validate([
             'first_name' => 'required',
             'last_name' => 'required',
-            'email' => 'required|email',
+            'email' => 'required|email|unique:users',
             'password' => ['required', 'min:8', 'regex:~[0-9]~', 'confirmed'],
             'password_confirmation' => ['required', 'min:8', 'regex:~[0-9]~'],
             'accepted_terms' => 'accepted'
         ]);
+
+
 
         $user = User::create([
         	'first_name' => $request->first_name,
