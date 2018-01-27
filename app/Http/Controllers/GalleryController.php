@@ -14,7 +14,8 @@ class GalleryController extends Controller
      */
     public function index()
     {
-        //
+        $galleries = Gallery::with(['user', 'images'])->latest()->get();
+        return $galleries;
     }
 
     /**
